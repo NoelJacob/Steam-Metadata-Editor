@@ -8,6 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
 
@@ -17,6 +18,10 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v5
+
+      - name: Install Deps on Linux
+        if: runner.os == 'Linux'
+        run: apt-get install python3-tk
 
       - name: Build Executable
         uses: Nuitka/Nuitka-Action@main
