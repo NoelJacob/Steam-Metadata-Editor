@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Deps on Linux
         if: runner.os == 'Linux'
-        run: apt-get install python3-tk
+        run: sudo apt-get install python3-tk
 
       - name: Build Executable
         uses: Nuitka/Nuitka-Action@main
@@ -34,7 +34,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          path: |
+          files: |
             build/*.exe
             build/*.bin
             build/*.app/**/*
